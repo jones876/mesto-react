@@ -44,6 +44,7 @@ function App() {
         title="Редактировать профиль"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        textSubmit="Сохранить"
       >
         <fieldset className="form__fieldset">
           <input
@@ -78,6 +79,7 @@ function App() {
         title="Новое место"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        textSubmit="Сохранить"
       >
         <fieldset className="form__fieldset">
           <input
@@ -113,6 +115,7 @@ function App() {
         title="Обновить аватар"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        textSubmit="Сохранить"
       >
         <fieldset className="form__fieldset">
           <input
