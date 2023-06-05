@@ -44,3 +44,4 @@
 @import url(./blocks/elements/__like-container/elements__like-container.css);
 @import url(./blocks/form/form-confirm-delete.css);
 @import url(./blocks/form/__header-confirm/form__header-confirm.css);
+@import url(./blocks/elements/__del-btn/_hidden/elements__del-btn_hidden.css);

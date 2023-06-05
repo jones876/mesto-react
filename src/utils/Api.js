@@ -37,9 +37,11 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
+        
       }),
     });
   }
+
 
   getInitialCards() {
     return this._request(this._baseUrl + "/cards", {
@@ -52,8 +54,8 @@ class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: data.card_name,
-        link: data.card_link,
+        name: data.name,
+        link: data.link,
       }),
     });
   }
