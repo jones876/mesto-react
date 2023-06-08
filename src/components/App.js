@@ -19,25 +19,17 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
 
-  const [deletedCard, setDeletedCard] = React.useState(false);
+  const [deletedCard, setDeletedCard] = React.useState({});
   const [selectedCard, setSelectedCard] = React.useState({});
   const [isLoad, setLoad] = React.useState(false);
 
   React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch(console.error);
-  }, []);
-
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([user, cards]) => {
+        setCurrentUser(user);
+        setCards(cards);
       })
       .catch(console.error);
   }, []);
@@ -52,13 +44,14 @@ function App() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
   function handleConfirmDeleteClick(card) {
+    setIsConfirmPopupOpen(true);
     setDeletedCard(card);
   }
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setDeletedCard(false);
+    setIsConfirmPopupOpen(false);
     setSelectedCard({});
   }
 
@@ -149,10 +142,9 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
-          onConfirmDelete={handleConfirmDeleteClick}
           onCardClick={setSelectedCard}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
+          onCardDelete={handleConfirmDeleteClick}
           cards={cards}
         />
         <Footer />
@@ -179,7 +171,7 @@ function App() {
         />
 
         <ConfirmDeletePopup
-          isOpen={deletedCard}
+          isOpen={isConfirmPopupOpen}
           onClose={closeAllPopups}
           onCardDelete={handleCardDelete}
           isLoad={isLoad}

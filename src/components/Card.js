@@ -7,7 +7,7 @@ function Card({
   likes,
   onCardClick,
   onCardLike,
-  onConfirmDelete,
+  onCardDelete,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
@@ -26,7 +26,7 @@ function Card({
     onCardLike(card);
   }
   function handleDeleteClick() {
-    onConfirmDelete(card);
+    onCardDelete(card);
   }
   return (
     <li className='elements__item'>
